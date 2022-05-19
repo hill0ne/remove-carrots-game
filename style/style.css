@@ -1,0 +1,65 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background-color: antiquewhite;
+}
+
+.game {
+  position: relative;
+  left: 10%;
+  width: 80%;
+  height: 40rem;
+  border-radius: 1em;
+  background: url("../assets/img/background.png") no-repeat center / cover;
+}
+
+.setting-icons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+.setting-icons > * {
+  margin: 1rem;
+}
+
+.playButton {
+  width: 5rem;
+  height: 5rem;
+  font-size: 2rem;
+  background-color: #f1f0c0;
+  border: 3px solid #00092c;
+  border-radius: 1rem;
+}
+
+.playButton:hover {
+  cursor: pointer;
+}
+
+.timer {
+  width: 10rem;
+  padding: 0.5rem 0;
+  font-size: 1.7rem;
+  text-align: center;
+  line-height: 1.5rem;
+  border: 3px solid #00092c;
+  border-radius: 1rem;
+  background-color: #f7f5f2;
+}
+
+.counter {
+  width: 3rem;
+  font-size: 2rem;
+  text-align: center;
+  background-color: #eeb0b0;
+  border: 3px solid white;
+  border-radius: 50%;
+}
