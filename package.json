@@ -1,0 +1,19 @@
+{
+  "name": "remove-carrots-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "live-server --port=3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hill0ne/remove-carrots-game.git"
+  },
+  "author": "hill0ne",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hill0ne/remove-carrots-game/issues"
+  },
+  "homepage": "https://github.com/hill0ne/remove-carrots-game#readme"
+}
