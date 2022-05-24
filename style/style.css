@@ -18,7 +18,7 @@ html {
   background: url("../assets/img/background.png") no-repeat center / cover;
 }
 
-.setting-icons {
+.container--icons {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -27,7 +27,7 @@ html {
   height: auto;
 }
 
-.setting-icons > * {
+.container--icons > * {
   margin: 1rem;
 }
 
@@ -53,6 +53,7 @@ html {
   border: 3px solid #00092c;
   border-radius: 1rem;
   background-color: #f7f5f2;
+  opacity: 0;
 }
 
 .counter {
@@ -62,4 +63,11 @@ html {
   background-color: #eeb0b0;
   border: 3px solid white;
   border-radius: 50%;
+  opacity: 0;
+}
+
+.gameField {
+  position: relative;
+  width: 100%;
+  height: calc(40rem - 17rem);
 }
