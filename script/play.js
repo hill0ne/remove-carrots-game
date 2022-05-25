@@ -1,4 +1,5 @@
 const game = document.querySelector(".game");
+const playButton = document.querySelector(".playButton");
 const timer = document.querySelector(".timer");
 
 let defaultTime = 10;
@@ -22,4 +23,9 @@ function startTimer() {
   }, 1000);
 }
 
-game.addEventListener("click", startTimer);
+function stopTimer() {
+  clearInterval(setTimer);
+  playButton.style.cssText = "visibility: hidden";
+}
+
+playButton.addEventListener("click", startTimer);

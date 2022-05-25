@@ -53,7 +53,7 @@ html {
   border: 3px solid #00092c;
   border-radius: 1rem;
   background-color: #f7f5f2;
-  opacity: 0;
+  visibility: hidden;
 }
 
 .counter {
@@ -63,11 +63,47 @@ html {
   background-color: #eeb0b0;
   border: 3px solid white;
   border-radius: 50%;
-  opacity: 0;
+  visibility: hidden;
 }
 
 .gameField {
   position: relative;
+  display: flex;
+  justify-content: center;
   width: 100%;
   height: calc(40rem - 17rem);
+}
+
+.popUp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 40%;
+  background-color: black;
+  border-radius: 1em;
+  opacity: 0.7;
+  transform: translate(75%, -120%);
+}
+
+.popUpButton {
+  cursor: pointer;
+  padding: 0.2em 0.3em;
+  font-size: 3rem;
+  background-color: #f1f0c0;
+  border: 3px solid #00092c;
+  border-radius: 0.3em;
+  font-size: 3rem;
+}
+
+.popUpText {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.popUp--hidden {
+  display: none;
 }
