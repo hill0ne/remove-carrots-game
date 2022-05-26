@@ -8,12 +8,13 @@ const counter = document.querySelector(".counter");
 const popup = document.querySelector(".popUp");
 const popupHidden = document.querySelector(".popUp--hidden");
 const popupText = document.querySelector(".popUpText");
+const replay = document.querySelector(".replay");
 
-let defaultTime = 10;
+let defaultTime = 5;
 let interval = undefined;
 
 const MINIMUN_SIZE = 50;
-const CARROT = 10;
+const CARROT = 5;
 const BUG = 10;
 
 const minX = 0;
@@ -22,18 +23,28 @@ const maxX = field.getBoundingClientRect().width - MINIMUN_SIZE;
 const maxY = field.getBoundingClientRect().height - MINIMUN_SIZE;
 
 let gameStatus = false;
-const scroe = 0;
+let score = 0;
 
 playButton.addEventListener("click", () => {
   if (gameStatus) {
+    // false
     stopGame();
   } else {
+    // true
     startGame();
   }
-  gameStatus = !gameStatus;
 });
 
+replay.addEventListener("click", () => {
+  gameStatus = true;
+  startGame();
+  hidePopUp();
+});
+
+field.addEventListener("click", onFieldClick);
+
 function startGame() {
+  gameStatus = true;
   initGame();
   showIcons();
   startTimer();
@@ -41,9 +52,24 @@ function startGame() {
 }
 
 function initGame() {
+  score = 0;
   field.innerHTML = "";
   counter.innerText = CARROT;
   createItems();
+}
+
+function stopGame() {
+  gameStatus = false;
+  stopTimer();
+  hideStopButton();
+  showPopUp("REPLAY?");
+}
+
+function finishGame(win) {
+  gameStatus = false;
+  stopTimer();
+  hideStopButton();
+  showPopUp(win ? "YOU WIN ! " : "YOU LOSE :( ");
 }
 
 const showIcons = () => {
@@ -79,7 +105,8 @@ function createItems() {
 }
 
 function showStopButton() {
-  const icon = document.querySelector(".fa-play");
+  const icon = document.querySelector(".playIcon");
+  icon.classList.remove("fa-play");
   icon.classList.add("fa-stop");
 }
 
@@ -89,6 +116,7 @@ function startTimer() {
   interval = setInterval(() => {
     if (remainingSec <= 0) {
       clearInterval(interval);
+      finishGame(score === CARROT);
       return;
     }
     updateTimer(--remainingSec);
@@ -101,12 +129,6 @@ function updateTimer(time) {
   timer.innerHTML = `${minutes}:${seconds}`;
 }
 
-function stopGame() {
-  stopTimer();
-  hideStopButton();
-  showPopUp("REPLAY?");
-}
-
 function stopTimer() {
   clearInterval(interval);
 }
@@ -116,8 +138,32 @@ function hideStopButton() {
 }
 
 function showPopUp(text) {
-  console.log(popup.classList);
   popupText.innerText = text;
-  console.log(popup.classList);
   popup.classList.remove("popUp--hidden");
+}
+
+function hidePopUp() {
+  popup.classList.add("popUp--hidden");
+  playButton.style.visibility = "visible";
+}
+
+function onFieldClick(event) {
+  if (!gameStatus) {
+    return;
+  }
+  const name = event.target.className;
+  if (name === "carrot") {
+    event.target.remove();
+    handleCounter();
+    if (score === CARROT) {
+      finishGame(true);
+    }
+  } else if (name === "bug") {
+    finishGame(false);
+  }
+}
+
+function handleCounter() {
+  ++score;
+  counter.innerText = CARROT - score;
 }
