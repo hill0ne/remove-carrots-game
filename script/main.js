@@ -1,14 +1,12 @@
 "use strict";
 
+import PopUp from "./popup.js";
+
 const game = document.querySelector(".game");
 const field = document.querySelector(".gameField");
 const playButton = document.querySelector(".playButton");
 const timer = document.querySelector(".timer");
 const counter = document.querySelector(".counter");
-const popup = document.querySelector(".popUp");
-const popupHidden = document.querySelector(".popUp--hidden");
-const popupText = document.querySelector(".popUpText");
-const replay = document.querySelector(".replay");
 
 let defaultTime = 5;
 let interval = undefined;
@@ -25,6 +23,11 @@ const maxY = field.getBoundingClientRect().height - MINIMUN_SIZE;
 let gameStatus = false;
 let score = 0;
 
+const gameFinishBanner = new PopUp();
+gameFinishBanner.setClickListener(() => {
+  startGame();
+});
+
 playButton.addEventListener("click", () => {
   if (gameStatus) {
     // false
@@ -33,12 +36,6 @@ playButton.addEventListener("click", () => {
     // true
     startGame();
   }
-});
-
-replay.addEventListener("click", () => {
-  gameStatus = true;
-  startGame();
-  hidePopUp();
 });
 
 field.addEventListener("click", onFieldClick);
@@ -62,14 +59,14 @@ function stopGame() {
   gameStatus = false;
   stopTimer();
   hideStopButton();
-  showPopUp("REPLAY?");
+  gameFinishBanner.show("REPLAY?");
 }
 
 function finishGame(win) {
   gameStatus = false;
   stopTimer();
   hideStopButton();
-  showPopUp(win ? "YOU WIN ! " : "YOU LOSE :( ");
+  gameFinishBanner.show(win ? "YOU WIN ! " : "YOU LOSE :( ");
 }
 
 const showIcons = () => {
@@ -135,16 +132,6 @@ function stopTimer() {
 
 function hideStopButton() {
   playButton.style.visibility = "hidden";
-}
-
-function showPopUp(text) {
-  popupText.innerText = text;
-  popup.classList.remove("popUp--hidden");
-}
-
-function hidePopUp() {
-  popup.classList.add("popUp--hidden");
-  playButton.style.visibility = "visible";
 }
 
 function onFieldClick(event) {
